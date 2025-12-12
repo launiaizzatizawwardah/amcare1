@@ -2,91 +2,108 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'riwayat_detail_page.dart';
 import '../../models/rekam_medis_model.dart';
-import '../../controllers/riwayat_controller.dart';
 import '../../routes/app_routes.dart';
 
 class RiwayatRekamMedisPage extends StatelessWidget {
-  RiwayatRekamMedisPage({super.key});
-
-  final RiwayatController c = Get.put(RiwayatController());
+  const RiwayatRekamMedisPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      /// 🔵 BACKGROUND FULL
-      decoration: const BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage("assets/images/background-marble.png"),
-          fit: BoxFit.cover,
-        ),
-      ),
+    final List<Map<String, String>> riwayatList = [
+      {
+        'tanggal': '20 Nov 2025',
+        'hari': '20',
+        'poli': 'Poli Umum',
+        'dokter': 'dr. Syahrizal Ardhiyandi Hidayat, MARS',
+        'asuransi': 'Jasa Raharja',
+      },
+      {
+        'tanggal': '15 Okt 2025',
+        'hari': '15',
+        'poli': 'Poli Gigi',
+        'dokter': 'drg. Sinta Dewi',
+        'asuransi': 'BPJS Kesehatan',
+      },
+      {
+        'tanggal': '02 Sep 2025',
+        'hari': '02',
+        'poli': 'Poli Anak',
+        'dokter': 'dr. Budi, SpA',
+        'asuransi': 'Mandiri',
+      },
+      {
+        'tanggal': '12 Agu 2025',
+        'hari': '12',
+        'poli': 'Poli Penyakit Dalam',
+        'dokter': 'dr. Rina, SpPD',
+        'asuransi': 'BPJS Kesehatan',
+      },
+    ];
 
-      child: Scaffold(
-        backgroundColor: Colors.transparent,
-        extendBodyBehindAppBar: false, // 🔥 SUPAYA TIDAK NGAMBANG
+    return Scaffold(
+      extendBodyBehindAppBar:
+          true, // ⭐ penting agar background masuk ke belakang AppBar
+      backgroundColor: Colors.transparent,
 
-        // ================= APPBAR FIX =================
-        appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(95),
-          child: Container(
-            height: 95,
-            decoration: const BoxDecoration(
-              color: Color(0xFF2E8BC0), // 🔥 AppBar solid, TIDAK transparan
-              borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(20),
-                bottomRight: Radius.circular(20),
-              ),
+      // ⭐ APPBAR
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(95),
+        child: Container(
+          height: 95,
+          decoration: const BoxDecoration(
+            color: Color(0xFF2E8BC0),
+            borderRadius: BorderRadius.only(
+              bottomLeft: Radius.circular(20),
+              bottomRight: Radius.circular(20),
             ),
-            child: SafeArea(
-              child: Row(
-                children: [
-                  IconButton(
-                    icon:
-                        const Icon(Icons.arrow_back, color: Colors.white, size: 26),
-                    onPressed: () => Get.offAllNamed(AppRoutes.home1),
+          ),
+          child: SafeArea(
+            child: Row(
+              children: [
+                IconButton(
+                  icon: const Icon(Icons.arrow_back,
+                      color: Colors.white, size: 26),
+                  onPressed: () => Get.offAllNamed(AppRoutes.home1),
+                ),
+                const SizedBox(width: 4),
+                const Text(
+                  "Riwayat Rekam Medis",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontFamily: 'LexendExa',
+                    fontWeight: FontWeight.bold,
+                    fontSize: 19,
                   ),
-                  const SizedBox(width: 4),
-                  const Text(
-                    "Riwayat Rekam Medis",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontFamily: 'LexendExa',
-                      fontWeight: FontWeight.bold,
-                      fontSize: 19,
-                    ),
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         ),
+      ),
 
-        // ================= BODY =================
-        body: Obx(() {
-          if (c.isLoading.value) {
-            return const Center(child: CircularProgressIndicator());
-          }
+      // ⭐ BODY
+      body: Stack(
+        children: [
+          // ⭐ BACKGROUND MARBLE
+          Positioned.fill(
+            child: Image.asset(
+              'assets/images/background-marble.png',
+              fit: BoxFit.cover,
+            ),
+          ),
 
-          if (c.riwayat.isEmpty) {
-            return const Center(
-              child: Text(
-                "Tidak ada riwayat ditemukan",
-                style: TextStyle(fontFamily: "LexendExa", fontSize: 16),
-              ),
-            );
-          }
-
-          return SingleChildScrollView(
+          // ⭐ KONTEN
+          SingleChildScrollView(
+            padding:
+                const EdgeInsets.fromLTRB(16, 120, 16, 24), // naikkan konten
             physics: const BouncingScrollPhysics(),
-
-            /// 🔥 Mulai dari BAWAH AppBar (tidak nabrak)
-            padding: const EdgeInsets.fromLTRB(16, 20, 16, 24),
-
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                // ================= INFO PASIEN =================
+                // INFO PASIEN
                 Container(
-                  padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(16),
@@ -113,7 +130,7 @@ class RiwayatRekamMedisPage extends StatelessWidget {
                           ),
                           SizedBox(height: 6),
                           Text(
-                            '10027878',
+                            '098645',
                             style: TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.bold,
@@ -149,30 +166,20 @@ class RiwayatRekamMedisPage extends StatelessWidget {
 
                 const SizedBox(height: 30),
 
-                // ================= LIST RIWAYAT =================
-                Column(
-                  children: List.generate(
-                    c.riwayat.length,
-                    (i) => Column(
-                      children: [
-                        _buildRiwayatCard(c.riwayat[i], i),
-                        const SizedBox(height: 20),
-                      ],
-                    ),
-                  ),
-                ),
+                for (var item in riwayatList) ...[
+                  _buildRiwayatCard(item, riwayatList.indexOf(item)),
+                  const SizedBox(height: 20),
+                ],
               ],
             ),
-          );
-        }),
+          ),
+        ],
       ),
     );
   }
 
-  // =============================================================
-  // CARD RIWAYAT
-  // =============================================================
-  Widget _buildRiwayatCard(RekamMedisItem item, int index) {
+  // ⭐ KARTU RIWAYAT
+  Widget _buildRiwayatCard(Map<String, String> item, int index) {
     return Container(
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
@@ -188,8 +195,9 @@ class RiwayatRekamMedisPage extends StatelessWidget {
         ],
       ),
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          /// ================= BOX TANGGAL =================
+          // Tanggal
           Container(
             width: 70,
             height: 70,
@@ -202,7 +210,7 @@ class RiwayatRekamMedisPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    _extractDay(item.tanggal),
+                    item['hari']!,
                     style: const TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
@@ -210,7 +218,7 @@ class RiwayatRekamMedisPage extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    item.tanggal,
+                    item['tanggal']!,
                     style: const TextStyle(
                       fontSize: 10,
                       color: Colors.black54,
@@ -224,13 +232,12 @@ class RiwayatRekamMedisPage extends StatelessWidget {
 
           const SizedBox(width: 14),
 
-          /// ================= DETAIL =================
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  item.poli,
+                  item['poli']!,
                   style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
@@ -239,16 +246,14 @@ class RiwayatRekamMedisPage extends StatelessWidget {
                 ),
                 const SizedBox(height: 2),
                 Text(
-                  item.dokter,
+                  item['dokter']!,
                   style: const TextStyle(
                     fontSize: 12,
                     color: Colors.black87,
                     fontFamily: 'LexendExa',
                   ),
                 ),
-
                 const SizedBox(height: 6),
-
                 Row(
                   children: [
                     const Icon(Icons.verified_user,
@@ -258,39 +263,57 @@ class RiwayatRekamMedisPage extends StatelessWidget {
                       'Asuransi',
                       style: TextStyle(
                         fontSize: 12,
+                        color: Colors.black87,
                         fontFamily: 'LexendExa',
                       ),
                     ),
-                    const SizedBox(width: 8),
-
+                    const SizedBox(width: 7),
                     Text(
-                      "BPJS",
+                      item['asuransi']!,
                       style: const TextStyle(
                         fontSize: 12,
                         color: Colors.black54,
                         fontFamily: 'LexendExa',
                       ),
                     ),
-
                     const Spacer(),
-
                     ElevatedButton(
                       onPressed: () {
                         showGeneralDialog(
                           context: Get.context!,
                           barrierDismissible: true,
                           barrierLabel: "Detail",
-                          transitionDuration:
-                              const Duration(milliseconds: 250),
-                          pageBuilder: (_, __, ___) =>
-                              DetailRiwayatRekamMedis(data: item),
+                          transitionDuration: const Duration(milliseconds: 280),
+                          pageBuilder: (_, __, ___) {
+                            return DetailRiwayatRekamMedis(
+                              data: dummyRekamMedis[index],
+                            );
+                          },
+                          transitionBuilder: (_, animation, __, child) {
+                            return Transform.scale(
+                              scale: animation.value,
+                              child: Opacity(
+                                opacity: animation.value,
+                                child: child,
+                              ),
+                            );
+                          },
                         );
                       },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.blueAccent,
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 10, vertical: 5),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                      ),
                       child: const Text(
-                        "Detail",
+                        'Detail',
                         style: TextStyle(
-                          fontSize: 11,
+                          fontSize: 10,
                           fontFamily: 'LexendExa',
+                          color: Colors.white,
                         ),
                       ),
                     ),
@@ -302,13 +325,5 @@ class RiwayatRekamMedisPage extends StatelessWidget {
         ],
       ),
     );
-  }
-
-  String _extractDay(String date) {
-    try {
-      return date.split("-").last;
-    } catch (_) {
-      return "-";
-    }
   }
 }

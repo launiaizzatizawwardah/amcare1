@@ -13,14 +13,18 @@ class DetailRiwayatRekamMedis extends StatelessWidget {
       children: [
         SizedBox(
           width: 120,
-          child: Text(label,
-              style: const TextStyle(fontFamily: 'LexendExa', fontSize: 12)),
+          child: Text(
+            label,
+            style: const TextStyle(fontFamily: 'LexendExa', fontSize: 12),
+          ),
         ),
         const Text(" : ",
             style: TextStyle(fontFamily: 'LexendExa', fontSize: 12)),
         Expanded(
-          child: Text(value,
-              style: const TextStyle(fontFamily: 'LexendExa', fontSize: 12)),
+          child: Text(
+            value,
+            style: const TextStyle(fontFamily: 'LexendExa', fontSize: 12),
+          ),
         ),
       ],
     );
@@ -30,64 +34,86 @@ class DetailRiwayatRekamMedis extends StatelessWidget {
   Widget build(BuildContext context) {
     return Dialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      insetPadding: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
       child: Stack(
         children: [
           Padding(
-            padding: const EdgeInsets.all(16),
+            padding: const EdgeInsets.fromLTRB(16, 16, 16, 20),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(data.tanggal,
-                    style: const TextStyle(
-                        fontFamily: 'LexendExa',
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16)),
+                
+                // ⭐ Tanggal di paling atas
+                Text(
+                  data.tanggal,
+                  style: const TextStyle(
+                    fontFamily: 'LexendExa',
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                  ),
+                ),
 
                 const SizedBox(height: 6),
 
-                Text(data.poli,
-                    style: const TextStyle(
-                        fontFamily: 'LexendExa',
-                        fontSize: 14,
-                        color: Colors.black87)),
+                // ⭐ Poli
+                Text(
+                  data.poli,
+                  style: const TextStyle(
+                    fontFamily: 'LexendExa',
+                    fontSize: 14,
+                    color: Colors.black87,
+                  ),
+                ),
 
                 const SizedBox(height: 4),
 
-                Text(data.dokter,
-                    style: const TextStyle(
-                        fontFamily: 'LexendExa',
-                        fontSize: 12,
-                        color: Colors.black54)),
+                // ⭐ Dokter
+                Text(
+                  data.dokter,
+                  style: const TextStyle(
+                    fontFamily: 'LexendExa',
+                    fontSize: 12,
+                    color: Colors.black54,
+                  ),
+                ),
 
                 const SizedBox(height: 12),
                 const Divider(),
-
-                const Text("Keluhan & Diagnosa",
-                    style: TextStyle(
-                      fontFamily: 'LexendExa',
-                      fontWeight: FontWeight.bold,
-                      fontSize: 14,
-                    )),
-
                 const SizedBox(height: 8),
 
-                // buildInfo("Keluhan", data.keluhan),
+                // ⭐ Bagian Diagnosa
+                const Text(
+                  'Keluhan & Diagnosa',
+                  style: TextStyle(
+                    fontFamily: 'LexendExa',
+                    fontWeight: FontWeight.bold,
+                    fontSize: 14,
+                  ),
+                ),
+
+                const SizedBox(height: 6),
+
+                buildInfo("Keluhan", data.keluhan),
                 buildInfo("Diagnosa", data.diagnosa),
+
+                const SizedBox(height: 12),
+                const Divider(),
 
                 const SizedBox(height: 10),
               ],
             ),
           ),
 
+          // ❌ Tombol close
           Positioned(
             right: 4,
             top: 4,
             child: IconButton(
-              icon: const Icon(Icons.close),
+              icon: const Icon(Icons.close, size: 20, color: Colors.black54),
               onPressed: () => Get.back(),
             ),
-          )
+          ),
         ],
       ),
     );

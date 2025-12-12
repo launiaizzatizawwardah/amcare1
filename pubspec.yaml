@@ -13,6 +13,8 @@ dependencies:
 
   # GetX untuk state management & routing
   get: ^4.6.5
+  url_launcher: ^6.2.2
+  font_awesome_flutter: ^10.6.0
 
   # HTTP
   http: ^0.13.6
@@ -23,27 +25,17 @@ dependencies:
   # iOS icons
   cupertino_icons: ^1.0.8
 
-  # Animasi Super Ringan & Keren
+  # ⭐⭐⭐ Animasi Super Ringan & Keren
   flutter_staggered_animations: ^1.1.1
   
-  # Carousel animasi
+  # ⭐ Carousel animasi (opsional tapi bagus)
   carousel_slider: ^4.2.1
 
-  # Telepon, WhatsApp, Browser
-  url_launcher: ^6.2.4
-
-  # Icon WhatsApp & Sirine
-  font_awesome_flutter: ^10.7.0
-
-  # Storage untuk token / session key
-  get_storage: ^2.1.1
-
-  # HTTP client modern
-  dio: ^5.9.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
   flutter_lints: ^5.0.0
 
 flutter:
@@ -67,32 +59,3 @@ flutter:
     - assets/images/emergency.png
     - assets/images/promosi.png
     - assets/images/background-marble.png
-    - assets/images/akupunkture.png
-    - assets/images/anak.png
-    - assets/images/beautycenter.png
-    - assets/images/bedah.png
-    - assets/images/dokterumum.png
-    - assets/images/fisioterapi.png
-    - assets/images/gigi.png
-    - assets/images/hipnoterapi.png
-    - assets/images/jantung.png
-    - assets/images/igd.png
-    - assets/images/kulit.png
-    - assets/images/laboratorium.png
-    - assets/images/laktasi.png
-    - assets/images/mata.png
-    - assets/images/obgyn.png
-    - assets/images/okupasi.png
-    - assets/images/orthopedi.png
-    - assets/images/ozon.png
-    - assets/images/paru.png
-    - assets/images/penyakit dalam b.png
-    - assets/images/penyakitdalam.png
-    - assets/images/psikiatri.png
-    - assets/images/radiologi.png
-    - assets/images/rehab_medik.png
-    - assets/images/stemcell.png
-    - assets/images/syaraf.png
-    - assets/images/terapi_wicara.png
-    - assets/images/THT.png
-    - assets/images/vaksin.png

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:flutter/services.dart'; // ⭐ WAJIB untuk inputFormatters
 import '/controllers/otp_controller.dart';
+import '/routes/app_routes.dart';
 
 class LoginPage extends StatelessWidget {
   LoginPage({super.key});
@@ -19,19 +20,7 @@ class LoginPage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const SizedBox(height: 10),
-
-              // 🔹 Tombol Back
-              Align(
-                alignment: Alignment.centerLeft,
-                child: IconButton(
-                  icon: const Icon(Icons.arrow_back,
-                      size: 26, color: Colors.black87),
-                  onPressed: () => Get.back(),
-                ),
-              ),
-
-              const SizedBox(height: 10),
+              const SizedBox(height: 20),
 
               // 🔹 Logo RS
               Center(
@@ -59,7 +48,7 @@ class LoginPage extends StatelessWidget {
 
               const SizedBox(height: 30),
 
-              // 🔹 Label NIK
+              // 🔹 Label NIK di atas field
               const Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
@@ -73,13 +62,13 @@ class LoginPage extends StatelessWidget {
 
               const SizedBox(height: 8),
 
-              // 🔹 Input NIK
+              // 🔹 Input NIK dengan placeholder + batas 16 digit
               TextField(
                 controller: nikController,
                 keyboardType: TextInputType.number,
                 inputFormatters: [
-                  LengthLimitingTextInputFormatter(16),
-                  FilteringTextInputFormatter.digitsOnly,
+                  LengthLimitingTextInputFormatter(16), // ⭐ Max 16 digit
+                  FilteringTextInputFormatter.digitsOnly, // ⭐ Hanya angka
                 ],
                 decoration: InputDecoration(
                   hintText: "Masukkan NIK",
@@ -92,50 +81,42 @@ class LoginPage extends StatelessWidget {
 
               const SizedBox(height: 32),
 
-              // 🔹 Tombol Continue (call API, bukan cuma pindah halaman)
-              Obx(
-                () => SizedBox(
-                  width: double.infinity,
-                  height: 55,
-                  child: ElevatedButton(
-                    onPressed: otpC.isLoading.value
-                        ? null
-                        : () async {
-                            final nik = nikController.text.trim();
+              // 🔹 Tombol Continue
+              SizedBox(
+                width: double.infinity,
+                height: 55,
+                child: ElevatedButton(
+                  onPressed: () {
+                    final nik = nikController.text.trim();
 
-                            if (nik.isEmpty) {
-                              Get.snackbar(
-                                  "Peringatan", "NIK tidak boleh kosong");
-                              return;
-                            }
+                    if (nik.isEmpty) {
+                      Get.snackbar("Peringatan", "NIK tidak boleh kosong");
+                      return;
+                    }
 
-                            if (nik.length != 16) {
-                              Get.snackbar(
-                                  "Format NIK salah", "Harus 16 angka");
-                              return;
-                            }
+                    if (nik.length != 16) {
+                      Get.snackbar("Format NIK salah", "Harus 16 angka");
+                      return;
+                    }
 
-                            // 🔥 Ini yang trigger OTP (2x call) + pindah halaman
-                            await otpC.sendOtp(nik);
-                          },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.lightBlueAccent,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30),
-                      ),
+                    Get.toNamed(
+                      AppRoutes.otpVerification,
+                      arguments: {"nik": nik},
+                    );
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.lightBlueAccent,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30),
                     ),
-                    child: otpC.isLoading.value
-                        ? const CircularProgressIndicator(
-                            color: Colors.white,
-                          )
-                        : const Text(
-                            "Continue",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16,
-                              color: Colors.white,
-                            ),
-                          ),
+                  ),
+                  child: const Text(
+                    "Continue",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                      color: Colors.white,
+                    ),
                   ),
                 ),
               ),

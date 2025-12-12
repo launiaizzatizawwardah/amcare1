@@ -98,41 +98,45 @@ class _PemantauanAntrianPageState extends State<PemantauanAntrianPage> {
             ),
           ),
 
-          // 🔹 Header biru — judul dekat back button
-Container(
-  height: 120,
-  width: double.infinity,
-  decoration: const BoxDecoration(
-    color: Color(0xFF2E8BC0),
-    borderRadius: BorderRadius.only(
-      bottomLeft: Radius.circular(30),
-      bottomRight: Radius.circular(30),
-    ),
-  ),
-  child: SafeArea(
-    child: Row(
-      children: [
-        IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.white),
-          onPressed: () => Get.offAllNamed(AppRoutes.home1),
-        ),
-
-        const SizedBox(width: 6), // jarak kecil biar mepet
-
-        const Text(
-          "Pemantauan Antrian",
-          style: TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.bold,
-            color: Colors.white,
-            fontFamily: 'LexendExa',
+          // 🔹 Header biru
+          Container(
+            height: 180,
+            width: double.infinity,
+            decoration: const BoxDecoration(
+              color: Color(0xFF2E8BC0),
+              borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(30),
+                bottomRight: Radius.circular(30),
+              ),
+            ),
+            child: SafeArea(
+              child: Stack(
+                alignment: Alignment.center,
+                children: [
+                  // 🔙 Panah di kiri
+                  Positioned(
+                    left: 8,
+                    child: IconButton(
+                      icon: const Icon(Icons.arrow_back, color: Colors.white),
+                      onPressed: () => Get.offAllNamed(AppRoutes.home1),
+                    ),
+                  ),
+                  // 🩵 Teks di tengah
+                  const Center(
+                    child: Text(
+                      'Pemantauan Antrian',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18,
+                        fontFamily: 'LexendExa',
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ),
-        ),
-      ],
-    ),
-  ),
-),
-
 
           // 🔹 Konten utama
           Column(
@@ -262,7 +266,7 @@ Container(
                                   ),
                                 ),
                                 subtitle: Text(
-                                  "${poli['dokter'] ?? '-'} • Jam: ${poli['jam_praktik'] ?? '-'}",
+                                  "dr. ${poli['dokter'] ?? '-'} • Jam: ${poli['jam_praktik'] ?? '-'}",
                                   style: const TextStyle(
                                     fontSize: 12,
                                     color: Colors.black54,

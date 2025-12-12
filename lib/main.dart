@@ -1,24 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
-
 import 'routes/app_routes.dart';
 
-// Controllers
+// 🧠 Controller
 import 'controllers/auth_controller.dart';
 import 'controllers/otp_controller.dart';
-import 'controllers/main_controller.dart';
+import 'controllers/main_controller.dart'; // ⭐ controller bottom nav
 
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-
-  // 🔥 WAJIB untuk menyimpan token/session_key
-  await GetStorage.init();
-
-  // Register controllers
+void main() {
+  // Controller global
   Get.put(AuthController());
   Get.put(OtpController());
-  Get.put(MainController());
+  Get.put(MainController()); // ⭐ WAJIB agar bottom nav tetap hidup
 
   runApp(const MyApp());
 }
@@ -31,7 +24,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'RS AMC',
-      initialRoute: AppRoutes.splash,
+      initialRoute: AppRoutes.splash, // tetap sama
       getPages: AppRoutes.routes,
       theme: ThemeData(
         primarySwatch: Colors.blue,

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '/controllers/poliklinik_controller.dart';
 import '/routes/app_routes.dart';
+import '/models/poliklinik_model.dart';
 
 class JadwalDokterPage extends StatelessWidget {
   final PoliklinikController controller = Get.put(PoliklinikController());
@@ -10,32 +11,21 @@ class JadwalDokterPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final args = Get.arguments ?? {};
-    final String from = args["from"] ?? "home";
-    final String? selectedPoli = args["poli"];
+    // ⭐ Ambil nama poliklinik dari halaman sebelumnya
+    final String? selectedPoli = Get.arguments;
 
-    // ============================================================
-    // 🔥 FILTER POLI HANYA JIKA DATANG DARI HALAMAN POLIKLINIK
-    // ============================================================
-    Future.microtask(() {
-      if (from == "klinik" && selectedPoli != null) {
-        ever(controller.dokterList, (_) {
-          controller.filterByKlinik(selectedPoli);
-        });
-
-        if (controller.dokterList.isNotEmpty) {
-          controller.filterByKlinik(selectedPoli);
-        }
-      } else {
-        // Jika dari homepage → tampilkan semua dokter
-        controller.filteredList.value = controller.dokterList;
-      }
-    });
+    // ⭐ Jalankan filter awal berdasarkan poliklinik
+    if (selectedPoli != null) {
+      Future.microtask(() {
+        controller.filterByKlinik(selectedPoli);
+      });
+    }
 
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: Stack(
         children: [
+          // 🔹 background marble
           Positioned.fill(
             child: Image.asset(
               'assets/images/background-marble.png',
@@ -43,9 +33,10 @@ class JadwalDokterPage extends StatelessWidget {
             ),
           ),
 
-          // ================= HEADER =================
+          // 🔹 header melengkung
           Container(
-            height: 90,
+            height: 150,
+            width: double.infinity,
             decoration: const BoxDecoration(
               color: Color(0xFF2E8BC0),
               borderRadius: BorderRadius.only(
@@ -55,94 +46,59 @@ class JadwalDokterPage extends StatelessWidget {
             ),
             child: SafeArea(
               child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   IconButton(
                     icon: const Icon(Icons.arrow_back, color: Colors.white),
-                    onPressed: () {
-                      if (from == "klinik") {
-                        Get.back();
-                      } else {
-                        Get.offAllNamed(AppRoutes.home1);
-                      }
-                    },
+                    onPressed: () => Get.offAllNamed(AppRoutes.home1),
                   ),
-                  const SizedBox(width: 4),
-                  const Text(
-                    "Jadwal Dokter",
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                      fontFamily: 'LexendExa',
+                  const Expanded(
+                    child: Center(
+                      child: Text(
+                        "Jadwal Dokter",
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                          fontFamily: 'LexendExa',
+                        ),
+                      ),
                     ),
                   ),
+                  const SizedBox(width: 48),
                 ],
               ),
             ),
           ),
 
-          // ================= CONTENT =================
+          // 🔹 konten utama
           Padding(
-            padding: const EdgeInsets.fromLTRB(16, 110, 16, 0),
+            padding: const EdgeInsets.fromLTRB(16, 160, 16, 0),
             child: Column(
               children: [
-                // SEARCH BAR
-                Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(30),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withOpacity(0.08),
-                        blurRadius: 6,
-                        offset: const Offset(0, 3),
-                      ),
-                    ],
-                  ),
-                  child: TextField(
-                    decoration: InputDecoration(
-                      hintText: 'Cari Dokter atau Poliklinik',
-                      prefixIcon: const Icon(Icons.search, color: Colors.grey),
-                      filled: true,
-                      fillColor: Colors.white,
-                      contentPadding:
-                          const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(30),
-                        borderSide: BorderSide.none,
-                      ),
+                // ⭐ Search bar (masih tetap bisa cari manual)
+                TextField(
+                  decoration: InputDecoration(
+                    hintText: 'Cari Dokter atau Poliklinik',
+                    prefixIcon: const Icon(Icons.search, color: Colors.grey),
+                    filled: true,
+                    fillColor: Colors.white,
+                    contentPadding: const EdgeInsets.symmetric(
+                        vertical: 10, horizontal: 16),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(30),
+                      borderSide: BorderSide.none,
                     ),
-                    onChanged: controller.searchPoliklinik,
                   ),
+                  onChanged: controller.searchPoliklinik,
                 ),
 
-                const SizedBox(height: 20),
+                const SizedBox(height: 16),
 
-                // ================= LIST DOKTER =================
+                // LIST DOKTER
                 Expanded(
                   child: Obx(() {
-                    // ================= LOADING =================
-                    if (controller.isLoading.value) {
-                      return const Center(
-                        child: CircularProgressIndicator(
-                          color: Color(0xFF2E8BC0),
-                        ),
-                      );
-                    }
-
                     final list = controller.filteredList;
-
-                    if (list.isEmpty) {
-                      return const Center(
-                        child: Text(
-                          "Tidak ada dokter tersedia",
-                          style: TextStyle(
-                            fontFamily: 'LexendExa',
-                            fontSize: 14,
-                            color: Colors.black54,
-                          ),
-                        ),
-                      );
-                    }
 
                     return ListView.builder(
                       physics: const BouncingScrollPhysics(),
@@ -165,17 +121,17 @@ class JadwalDokterPage extends StatelessWidget {
                               ),
                             ],
                           ),
-
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              // ================= INFO DOKTER =================
+                              // info dokter
                               Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         item.namaPoli,
@@ -198,7 +154,6 @@ class JadwalDokterPage extends StatelessWidget {
                                       ),
                                     ],
                                   ),
-
                                   ElevatedButton(
                                     onPressed: () {
                                       Get.toNamed(AppRoutes.pendaftaranOnline);
@@ -226,69 +181,63 @@ class JadwalDokterPage extends StatelessWidget {
 
                               const SizedBox(height: 14),
 
-                              // ================= JADWAL (RAPI & SCROLLABLE) =================
+                              // jadwal
                               Container(
                                 padding: const EdgeInsets.symmetric(
-                                    horizontal: 8, vertical: 12),
+                                    horizontal: 8, vertical: 10),
                                 decoration: BoxDecoration(
-                                  color: const Color(0xFF2E8BC0).withOpacity(0.08),
+                                  color:
+                                      const Color(0xFF2E8BC0).withOpacity(0.08),
                                   borderRadius: BorderRadius.circular(12),
                                 ),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: item.jadwal.keys.map((hari) {
+                                    final jamList = item.jadwal[hari] ?? ['-'];
+                                    final jam = jamList.join('\n');
 
-                                child: SingleChildScrollView(
-                                  scrollDirection: Axis.horizontal,
-                                  child: Row(
-                                    children: item.jadwal.keys.map((hari) {
-                                      final jam = item.jadwal[hari] ?? "-";
-
-                                      return Container(
-                                        width: 80,
-                                        margin: const EdgeInsets.symmetric(horizontal: 6),
+                                    return Expanded(
+                                      child: Container(
+                                        margin: const EdgeInsets.symmetric(
+                                            horizontal: 4),
                                         padding: const EdgeInsets.symmetric(
-                                            vertical: 10, horizontal: 6),
+                                            vertical: 6),
                                         decoration: BoxDecoration(
                                           color: Colors.white,
-                                          borderRadius: BorderRadius.circular(10),
+                                          borderRadius:
+                                              BorderRadius.circular(8),
                                           border: Border.all(
-                                            color: Colors.blueAccent.withOpacity(0.25),
+                                            color: Colors.blueAccent
+                                                .withOpacity(0.2),
                                           ),
-                                          boxShadow: [
-                                            BoxShadow(
-                                              color: Colors.black.withOpacity(0.05),
-                                              blurRadius: 4,
-                                              offset: const Offset(0, 2),
-                                            )
-                                          ],
                                         ),
-
                                         child: Column(
-                                          mainAxisAlignment: MainAxisAlignment.center,
                                           children: [
                                             Text(
                                               hari,
                                               style: const TextStyle(
-                                                fontSize: 12,
                                                 fontWeight: FontWeight.bold,
                                                 color: Color(0xFF2E8BC0),
+                                                fontSize: 12,
                                                 fontFamily: 'LexendExa',
                                               ),
                                             ),
-                                            const SizedBox(height: 6),
+                                            const SizedBox(height: 4),
                                             Text(
                                               jam,
                                               textAlign: TextAlign.center,
                                               style: const TextStyle(
                                                 fontSize: 11,
-                                                color: Colors.black87,
-                                                height: 1.2,
+                                                color: Colors.black54,
                                                 fontFamily: 'LexendExa',
                                               ),
                                             ),
                                           ],
                                         ),
-                                      );
-                                    }).toList(),
-                                  ),
+                                      ),
+                                    );
+                                  }).toList(),
                                 ),
                               ),
                             ],

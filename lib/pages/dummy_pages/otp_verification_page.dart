@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '/controllers/otp_controller.dart';
+import '/routes/app_routes.dart';
 
 class OTPVerificationPage extends StatelessWidget {
   OTPVerificationPage({super.key});
@@ -10,6 +11,7 @@ class OTPVerificationPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Ambil NIK dari halaman Login
     final args = Get.arguments;
     final String nik = (args?['nik'] ?? '').toString();
 
@@ -38,6 +40,7 @@ class OTPVerificationPage extends StatelessWidget {
 
             const SizedBox(height: 40),
 
+            // 6 digit OTP boxes
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: List.generate(6, (index) {
@@ -67,62 +70,60 @@ class OTPVerificationPage extends StatelessWidget {
 
             const SizedBox(height: 50),
 
-            // TOMBOL VERIFIKASI
-            Obx(
-              () => ElevatedButton(
-                onPressed: otpC.isLoading.value
-                    ? null
-                    : () async {
-                        // Gabungkan 6 digit otp tanpa spasi
-                        final otp = otpControllers
-                            .map((c) => c.text.trim())
-                            .join("");
+            // Tombol Verifikasi tanpa API
+            ElevatedButton(
+              onPressed: () {
+                final otp = otpControllers.map((c) => c.text).join();
 
-                        // Cek apakah semua digit terisi
-                        if (otp.length != 6 || otp.contains(" ")) {
-                          Get.snackbar(
-                            "OTP tidak valid",
-                            "Pastikan semua kotak OTP terisi",
-                          );
-                          return;
-                        }
+                if (otp.length != 6) {
+                  Get.snackbar(
+                    "OTP Tidak Lengkap",
+                    "Masukkan 6 digit OTP",
+                    backgroundColor: Colors.orange.shade100,
+                    colorText: Colors.black87,
+                  );
+                  return;
+                }
 
-                        await otpC.verifyOtp(
-                          nik: nik.trim(),
-                          otp: otp,
-                        );
-                      },
-                style: ElevatedButton.styleFrom(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 80, vertical: 15),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  backgroundColor: Colors.blueAccent,
+                if (otp == "123456") {
+                  // OTP benar → ke Homepage1
+                  Get.offAllNamed(AppRoutes.home1);
+                } else {
+                  Get.snackbar(
+                    "OTP Salah",
+                    "Kode OTP yang kamu masukkan salah!",
+                    backgroundColor: Colors.red.shade100,
+                    colorText: Colors.red.shade900,
+                  );
+                }
+              },
+              style: ElevatedButton.styleFrom(
+                padding: const EdgeInsets.symmetric(
+                    horizontal: 80, vertical: 15),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
                 ),
-                child: otpC.isLoading.value
-                    ? const CircularProgressIndicator(color: Colors.white)
-                    : const Text(
-                        "Verifikasi",
-                        style: TextStyle(fontSize: 18, color: Colors.white),
-                      ),
+                backgroundColor: Colors.blueAccent,
+              ),
+              child: const Text(
+                "Verifikasi",
+                style: TextStyle(fontSize: 18, color: Colors.white),
               ),
             ),
 
             const SizedBox(height: 20),
 
-            // TOMBOL RESEND OTP
-            Obx(
-              () => TextButton(
-                onPressed: otpC.isResending.value
-                    ? null
-                    : () async {
-                        await otpC.resendOtp(nik.trim());
-                      },
-                child: otpC.isResending.value
-                    ? const Text("Mengirim ulang...")
-                    : const Text("Kirim Ulang OTP"),
-              ),
+            // Tombol kirim ulang dummy
+            TextButton(
+              onPressed: () {
+                Get.snackbar(
+                  "OTP Dikirim Ulang",
+                  "Gunakan kode dummy: 123456",
+                  backgroundColor: Colors.blue.shade50,
+                  colorText: Colors.blue.shade900,
+                );
+              },
+              child: const Text("Kirim Ulang OTP"),
             ),
           ],
         ),
