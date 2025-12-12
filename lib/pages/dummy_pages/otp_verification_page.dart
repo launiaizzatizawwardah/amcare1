@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '/controllers/otp_controller.dart';
+<<<<<<< HEAD
 import '/routes/app_routes.dart';
+=======
+>>>>>>> e0c14dc96216e9a64eda25ee6dde43e409100d6f
 
 class OTPVerificationPage extends StatelessWidget {
   OTPVerificationPage({super.key});
@@ -11,7 +14,10 @@ class OTPVerificationPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+<<<<<<< HEAD
     // Ambil NIK dari halaman Login
+=======
+>>>>>>> e0c14dc96216e9a64eda25ee6dde43e409100d6f
     final args = Get.arguments;
     final String nik = (args?['nik'] ?? '').toString();
 
@@ -40,7 +46,10 @@ class OTPVerificationPage extends StatelessWidget {
 
             const SizedBox(height: 40),
 
+<<<<<<< HEAD
             // 6 digit OTP boxes
+=======
+>>>>>>> e0c14dc96216e9a64eda25ee6dde43e409100d6f
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: List.generate(6, (index) {
@@ -70,6 +79,7 @@ class OTPVerificationPage extends StatelessWidget {
 
             const SizedBox(height: 50),
 
+<<<<<<< HEAD
             // Tombol Verifikasi tanpa API
             ElevatedButton(
               onPressed: () {
@@ -108,11 +118,53 @@ class OTPVerificationPage extends StatelessWidget {
               child: const Text(
                 "Verifikasi",
                 style: TextStyle(fontSize: 18, color: Colors.white),
+=======
+            // TOMBOL VERIFIKASI
+            Obx(
+              () => ElevatedButton(
+                onPressed: otpC.isLoading.value
+                    ? null
+                    : () async {
+                        // Gabungkan 6 digit otp tanpa spasi
+                        final otp = otpControllers
+                            .map((c) => c.text.trim())
+                            .join("");
+
+                        // Cek apakah semua digit terisi
+                        if (otp.length != 6 || otp.contains(" ")) {
+                          Get.snackbar(
+                            "OTP tidak valid",
+                            "Pastikan semua kotak OTP terisi",
+                          );
+                          return;
+                        }
+
+                        await otpC.verifyOtp(
+                          nik: nik.trim(),
+                          otp: otp,
+                        );
+                      },
+                style: ElevatedButton.styleFrom(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 80, vertical: 15),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  backgroundColor: Colors.blueAccent,
+                ),
+                child: otpC.isLoading.value
+                    ? const CircularProgressIndicator(color: Colors.white)
+                    : const Text(
+                        "Verifikasi",
+                        style: TextStyle(fontSize: 18, color: Colors.white),
+                      ),
+>>>>>>> e0c14dc96216e9a64eda25ee6dde43e409100d6f
               ),
             ),
 
             const SizedBox(height: 20),
 
+<<<<<<< HEAD
             // Tombol kirim ulang dummy
             TextButton(
               onPressed: () {
@@ -124,6 +176,20 @@ class OTPVerificationPage extends StatelessWidget {
                 );
               },
               child: const Text("Kirim Ulang OTP"),
+=======
+            // TOMBOL RESEND OTP
+            Obx(
+              () => TextButton(
+                onPressed: otpC.isResending.value
+                    ? null
+                    : () async {
+                        await otpC.resendOtp(nik.trim());
+                      },
+                child: otpC.isResending.value
+                    ? const Text("Mengirim ulang...")
+                    : const Text("Kirim Ulang OTP"),
+              ),
+>>>>>>> e0c14dc96216e9a64eda25ee6dde43e409100d6f
             ),
           ],
         ),

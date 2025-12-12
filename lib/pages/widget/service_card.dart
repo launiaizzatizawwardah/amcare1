@@ -1,18 +1,26 @@
+<<<<<<< HEAD
 // File: ./widget/service_card.dart (Revisi Akhir untuk Tinggi)
 
+=======
+>>>>>>> e0c14dc96216e9a64eda25ee6dde43e409100d6f
 import 'package:flutter/material.dart';
 
 class ServiceCard extends StatelessWidget {
   final String title;
   final String subtitle;
   final String price;
+<<<<<<< HEAD
   final String? imageUrl;
+=======
+  final String? imageUrl; // 🔹 tambahan opsional
+>>>>>>> e0c14dc96216e9a64eda25ee6dde43e409100d6f
 
   const ServiceCard({
     super.key,
     required this.title,
     required this.subtitle,
     required this.price,
+<<<<<<< HEAD
     this.imageUrl,
   });
 
@@ -20,10 +28,16 @@ class ServiceCard extends StatelessWidget {
     return text.replaceAll(RegExp(r'<[^>]*>'), '').trim();
   }
 
+=======
+    this.imageUrl, // 🔹 tambahan opsional
+  });
+
+>>>>>>> e0c14dc96216e9a64eda25ee6dde43e409100d6f
   @override
   Widget build(BuildContext context) {
     return Container(
       width: 200,
+<<<<<<< HEAD
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(16),
@@ -35,10 +49,18 @@ class ServiceCard extends StatelessWidget {
             offset: const Offset(0, 3),
           ),
         ],
+=======
+      margin: const EdgeInsets.only(right: 8),
+      padding: const EdgeInsets.all(8),
+      decoration: BoxDecoration(
+        color: Colors.blue.shade50,
+        borderRadius: BorderRadius.circular(12),
+>>>>>>> e0c14dc96216e9a64eda25ee6dde43e409100d6f
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+<<<<<<< HEAD
           // 🔹 Bagian Gambar Layanan
           if (imageUrl != null && imageUrl!.isNotEmpty)
             ClipRRect(
@@ -47,11 +69,21 @@ class ServiceCard extends StatelessWidget {
               child: Image.network(
                 imageUrl!,
                 height: 80, // Tinggi gambar dikunci
+=======
+          // 🔹 tampilkan gambar dari API kalau ada
+          if (imageUrl != null && imageUrl!.isNotEmpty)
+            ClipRRect(
+              borderRadius: BorderRadius.circular(8),
+              child: Image.network(
+                imageUrl!,
+                height: 80,
+>>>>>>> e0c14dc96216e9a64eda25ee6dde43e409100d6f
                 width: double.infinity,
                 fit: BoxFit.cover,
                 errorBuilder: (context, error, stackTrace) => Container(
                   height: 80,
                   color: Colors.grey.shade200,
+<<<<<<< HEAD
                   child: const Center(
                     child:
                         Icon(Icons.broken_image, color: Colors.grey, size: 30),
@@ -110,6 +142,47 @@ class ServiceCard extends StatelessWidget {
                   ),
                 ],
               ),
+=======
+                  child: const Icon(Icons.broken_image, color: Colors.grey),
+                ),
+              ),
+            ),
+          if (imageUrl != null && imageUrl!.isNotEmpty)
+            const SizedBox(height: 6),
+
+          // 🔹 teks nama layanan
+          Text(
+            title,
+            style: const TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 14,
+            ),
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+          ),
+
+          const SizedBox(height: 4),
+
+          // 🔹 teks deskripsi
+          Text(
+            subtitle,
+            style: const TextStyle(
+              fontSize: 12,
+              color: Colors.black54,
+            ),
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+          ),
+
+          const Spacer(),
+
+          // 🔹 harga
+          Text(
+            price == '0' ? 'Gratis' : 'Rp $price',
+            style: const TextStyle(
+              color: Colors.blue,
+              fontWeight: FontWeight.bold,
+>>>>>>> e0c14dc96216e9a64eda25ee6dde43e409100d6f
             ),
           ),
         ],

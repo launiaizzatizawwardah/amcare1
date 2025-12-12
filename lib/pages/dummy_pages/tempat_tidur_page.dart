@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+<<<<<<< HEAD
 import '/routes/app_routes.dart';
 
 class TempatTidurPage extends StatelessWidget {
@@ -19,11 +20,24 @@ class TempatTidurPage extends StatelessWidget {
   Widget build(BuildContext context) {
     const Color primary = Color(0xFF2E8BC0);
 
+=======
+import '/controllers/tempat_tidur_controller.dart';
+import '/routes/app_routes.dart';
+
+class TempatTidurPage extends StatelessWidget {
+  final controller = Get.put(TempatTidurController());
+
+  @override
+  Widget build(BuildContext context) {
+>>>>>>> e0c14dc96216e9a64eda25ee6dde43e409100d6f
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: Stack(
         children: [
+<<<<<<< HEAD
           // 🔹 Background marble (tetap)
+=======
+>>>>>>> e0c14dc96216e9a64eda25ee6dde43e409100d6f
           Positioned.fill(
             child: Image.asset(
               'assets/images/background-marble.png',
@@ -31,12 +45,19 @@ class TempatTidurPage extends StatelessWidget {
             ),
           ),
 
+<<<<<<< HEAD
           // 🔹 Header Biru (lebih naik)
           Container(
             height: 95,
             width: double.infinity,
             decoration: const BoxDecoration(
               color: primary,
+=======
+          Container(
+            height: 95,
+            decoration: const BoxDecoration(
+              color: Color(0xFF2E8BC0),
+>>>>>>> e0c14dc96216e9a64eda25ee6dde43e409100d6f
               borderRadius: BorderRadius.only(
                 bottomLeft: Radius.circular(30),
                 bottomRight: Radius.circular(30),
@@ -44,6 +65,7 @@ class TempatTidurPage extends StatelessWidget {
             ),
             child: SafeArea(
               child: Row(
+<<<<<<< HEAD
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   IconButton(
@@ -65,11 +87,26 @@ class TempatTidurPage extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(width: 48),
+=======
+                children: const [
+                  BackButton(color: Colors.white),
+                  SizedBox(width: 4),
+                  Text(
+                    "Ketersediaan Tempat Tidur",
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                      fontFamily: 'LexendExa',
+                    ),
+                  )
+>>>>>>> e0c14dc96216e9a64eda25ee6dde43e409100d6f
                 ],
               ),
             ),
           ),
 
+<<<<<<< HEAD
           // 🔹 Konten Utama
           Padding(
             padding: const EdgeInsets.fromLTRB(16, 120, 16, 0),
@@ -214,6 +251,86 @@ class TempatTidurPage extends StatelessWidget {
                 ),
               ],
             ),
+=======
+          Padding(
+            padding: const EdgeInsets.fromLTRB(16, 110, 16, 0),
+            child: Obx(() {
+              final list = controller.listBangsal;
+
+              if (list.isEmpty) {
+                return const Center(
+                  child: CircularProgressIndicator(color: Colors.blue),
+                );
+              }
+
+              return ListView.builder(
+                itemCount: list.length,
+                itemBuilder: (_, index) {
+                  final item = list[index];
+
+                  return GestureDetector(
+                    onTap: () {
+                      Get.toNamed(
+                        AppRoutes.detailTempatTidur,
+                        arguments: item,
+                      );
+                    },
+                    child: Container(
+                      margin: const EdgeInsets.only(bottom: 16),
+                      padding: const EdgeInsets.all(18),
+                      decoration: BoxDecoration(
+                        color: Colors.white.withOpacity(0.95),
+                        borderRadius: BorderRadius.circular(16),
+                        border: Border.all(
+                          color: Colors.blueAccent.withOpacity(0.3),
+                        ),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.1),
+                            blurRadius: 6,
+                            offset: Offset(0, 3),
+                          ),
+                        ],
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            item.namaRuang,
+                            style: const TextStyle(
+                              color: Color(0xFF2E8BC0),
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                              fontFamily: 'LexendExa',
+                            ),
+                          ),
+                          Row(
+                            children: [
+                              const Icon(
+                                Icons.bed,
+                                color: Colors.black54,
+                                size: 20,
+                              ),
+                              const SizedBox(width: 6),
+                              Text(
+                                "${item.tersedia} Tersedia",
+                                style: const TextStyle(
+                                  color: Colors.black54,
+                                  fontFamily: 'LexendExa',
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                },
+              );
+            }),
+>>>>>>> e0c14dc96216e9a64eda25ee6dde43e409100d6f
           ),
         ],
       ),

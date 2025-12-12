@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+<<<<<<< HEAD
+=======
+import '/controllers/farmasi_controller.dart';
+>>>>>>> e0c14dc96216e9a64eda25ee6dde43e409100d6f
 import '/routes/app_routes.dart';
 
 class AntrianFarmasiPage extends StatelessWidget {
@@ -7,11 +11,19 @@ class AntrianFarmasiPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+<<<<<<< HEAD
+=======
+    final c = Get.put(FarmasiController());
+
+>>>>>>> e0c14dc96216e9a64eda25ee6dde43e409100d6f
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: Stack(
         children: [
+<<<<<<< HEAD
           // 🔹 Background marble
+=======
+>>>>>>> e0c14dc96216e9a64eda25ee6dde43e409100d6f
           Positioned.fill(
             child: Image.asset(
               'assets/images/background-marble.png',
@@ -19,10 +31,16 @@ class AntrianFarmasiPage extends StatelessWidget {
             ),
           ),
 
+<<<<<<< HEAD
           // 🔹 Header biru elegan (TIDAK DIUBAH)
           Container(
             height: 95,
             width: double.infinity,
+=======
+          // 🔹 HEADER
+          Container(
+            height: 95,
+>>>>>>> e0c14dc96216e9a64eda25ee6dde43e409100d6f
             decoration: const BoxDecoration(
               color: Color(0xFF2E8BC0),
               borderRadius: BorderRadius.only(
@@ -32,13 +50,18 @@ class AntrianFarmasiPage extends StatelessWidget {
             ),
             child: SafeArea(
               child: Row(
+<<<<<<< HEAD
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   // ⭐ Back ke HomePage1
+=======
+                children: [
+>>>>>>> e0c14dc96216e9a64eda25ee6dde43e409100d6f
                   IconButton(
                     icon: const Icon(Icons.arrow_back, color: Colors.white),
                     onPressed: () => Get.offAllNamed(AppRoutes.home1),
                   ),
+<<<<<<< HEAD
 
                   const Expanded(
                     child: Center(
@@ -55,11 +78,24 @@ class AntrianFarmasiPage extends StatelessWidget {
                   ),
 
                   const SizedBox(width: 10),
+=======
+                  const SizedBox(width: 4),
+                  const Text(
+                    "Antrian Farmasi",
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                      fontFamily: 'LexendExa',
+                    ),
+                  ),
+>>>>>>> e0c14dc96216e9a64eda25ee6dde43e409100d6f
                 ],
               ),
             ),
           ),
 
+<<<<<<< HEAD
           // 🔹 Konten utama
           Padding(
             padding: const EdgeInsets.fromLTRB(16, 170, 16, 0),
@@ -95,6 +131,51 @@ class AntrianFarmasiPage extends StatelessWidget {
                 ),
               ],
             ),
+=======
+          Padding(
+            padding: const EdgeInsets.fromLTRB(16, 110, 16, 0),
+            child: Obx(() {
+              if (c.isLoading.value) {
+                return const Center(child: CircularProgressIndicator());
+              }
+
+              if (c.daftarFarmasi.isEmpty) {
+                return const Center(
+                  child: Text(
+                    "Tidak ada antrian farmasi ditemukan",
+                    style: TextStyle(
+                      fontFamily: 'LexendExa',
+                      color: Colors.black54,
+                      fontSize: 14,
+                    ),
+                  ),
+                );
+              }
+
+              // 🔥 Pisahkan racikan & non racikan
+              final nonRacik = c.daftarFarmasi.where((e) => e["racikan"] == "1").toList();
+final racik = c.daftarFarmasi.where((e) => e["racikan"] == "2").toList();
+
+              return ListView(
+                physics: const BouncingScrollPhysics(),
+                children: [
+                  _AntrianCard(
+                    title: "Non Racikan",
+                    currentNumber: nonRacik.isNotEmpty
+                        ? nonRacik.first["nomor"]
+                        : "-",
+                  ),
+                  const SizedBox(height: 20),
+                  _AntrianCard(
+                    title: "Racikan",
+                    currentNumber: racik.isNotEmpty
+                        ? racik.first["nomor"]
+                        : "-",
+                  ),
+                ],
+              );
+            }),
+>>>>>>> e0c14dc96216e9a64eda25ee6dde43e409100d6f
           ),
         ],
       ),
@@ -103,7 +184,11 @@ class AntrianFarmasiPage extends StatelessWidget {
 }
 
 // ============================================================
+<<<<<<< HEAD
 // 🔹 COMPONENT KARTU ANTRIAN — LAYOUT BARU LEBIH KEREN
+=======
+// 🔹 CARD COMPONENT
+>>>>>>> e0c14dc96216e9a64eda25ee6dde43e409100d6f
 // ============================================================
 class _AntrianCard extends StatelessWidget {
   final String title;
@@ -116,6 +201,7 @@ class _AntrianCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+<<<<<<< HEAD
     final Color primary = const Color(0xFF2E8BC0);
 
     return Container(
@@ -365,6 +451,58 @@ class _AntrianCard extends StatelessWidget {
             ),
           ],
         ),
+=======
+    return Container(
+      margin: const EdgeInsets.only(bottom: 18),
+      padding: const EdgeInsets.all(18),
+      decoration: BoxDecoration(
+        color: Colors.white.withOpacity(0.95),
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: Colors.blueAccent.withOpacity(0.3)),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.08),
+            blurRadius: 6,
+            offset: const Offset(0, 3),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            title,
+            style: const TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+              color: Color(0xFF2E8BC0),
+              fontFamily: 'LexendExa',
+            ),
+          ),
+          const SizedBox(height: 16),
+          Container(
+            width: double.infinity,
+            padding: const EdgeInsets.symmetric(vertical: 20),
+            decoration: BoxDecoration(
+              color: const Color(0xFF2E8BC0).withOpacity(0.1),
+              borderRadius: BorderRadius.circular(12),
+              border: Border.all(color: Colors.blueAccent.withOpacity(0.2)),
+            ),
+            child: Center(
+              child: Text(
+                currentNumber,
+                style: const TextStyle(
+                  fontSize: 36,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xFF2E8BC0),
+                  letterSpacing: 1.5,
+                  fontFamily: 'LexendExa',
+                ),
+              ),
+            ),
+          ),
+        ],
+>>>>>>> e0c14dc96216e9a64eda25ee6dde43e409100d6f
       ),
     );
   }

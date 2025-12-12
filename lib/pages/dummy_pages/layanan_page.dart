@@ -2,6 +2,10 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../controllers/home_controller.dart';
+<<<<<<< HEAD
+=======
+// Import halaman detail yang baru
+>>>>>>> e0c14dc96216e9a64eda25ee6dde43e409100d6f
 import 'layanan_detail_page.dart';
 
 class LayananPage extends StatelessWidget {
@@ -13,6 +17,13 @@ class LayananPage extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: Colors.white,
+<<<<<<< HEAD
+=======
+
+      // ==========================================================
+      // HEADER
+      // ==========================================================
+>>>>>>> e0c14dc96216e9a64eda25ee6dde43e409100d6f
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(90),
         child: Container(
@@ -31,9 +42,20 @@ class LayananPage extends StatelessWidget {
             bottom: 20,
           ),
           child: Row(
+<<<<<<< HEAD
             children: const [
               SizedBox(width: 10),
               Text(
+=======
+            children: [
+              GestureDetector(
+                onTap: () => Get.back(),
+                child: const Icon(Icons.arrow_back_ios,
+                    color: Colors.white, size: 22),
+              ),
+              const SizedBox(width: 10),
+              const Text(
+>>>>>>> e0c14dc96216e9a64eda25ee6dde43e409100d6f
                 "Paket Layanan",
                 style: TextStyle(
                   fontFamily: 'LexendExa',
@@ -46,6 +68,13 @@ class LayananPage extends StatelessWidget {
           ),
         ),
       ),
+<<<<<<< HEAD
+=======
+
+      // ==========================================================
+      // BODY (Grid View)
+      // ==========================================================
+>>>>>>> e0c14dc96216e9a64eda25ee6dde43e409100d6f
       body: Obx(() {
         if (home.isLoadingLayanan.value) {
           return const Center(child: CircularProgressIndicator());
@@ -68,6 +97,11 @@ class LayananPage extends StatelessWidget {
               crossAxisCount: 2,
               crossAxisSpacing: 16,
               mainAxisSpacing: 16,
+<<<<<<< HEAD
+=======
+              // MODIFIKASI: Mengurangi rasio ke 0.70
+              // Nilai yang LEBIH KECIL membuat tinggi kartu LEBIH BESAR (lebih panjang)
+>>>>>>> e0c14dc96216e9a64eda25ee6dde43e409100d6f
               childAspectRatio: 0.70,
             ),
             itemBuilder: (context, index) {
@@ -88,11 +122,16 @@ class LayananPage extends StatelessWidget {
     );
   }
 
+<<<<<<< HEAD
+=======
+  // Bersihkan tag HTML
+>>>>>>> e0c14dc96216e9a64eda25ee6dde43e409100d6f
   String _cleanHtml(String html) {
     final regex = RegExp(r'<[^>]*>', multiLine: true, caseSensitive: false);
     return html.replaceAll(regex, '').replaceAll('&nbsp;', ' ').trim();
   }
 
+<<<<<<< HEAD
   // Format angka ke "Rp 150.000"
   String _formatPrice(int price) {
     if (price <= 0) return ""; // harga 0 → tidak tampil
@@ -119,6 +158,10 @@ class LayananPage extends StatelessWidget {
 
   // ==========================================================
   // CARD LAYANAN
+=======
+  // ==========================================================
+  // CARD LAYANAN (Dibuat Lebih Panjang)
+>>>>>>> e0c14dc96216e9a64eda25ee6dde43e409100d6f
   // ==========================================================
   Widget _buildServiceCard({
     required String title,
@@ -126,6 +169,10 @@ class LayananPage extends StatelessWidget {
     required String imageUrl,
     required int price,
   }) {
+<<<<<<< HEAD
+=======
+    // Fungsi onTap akan dipanggil oleh GestureDetector terluar
+>>>>>>> e0c14dc96216e9a64eda25ee6dde43e409100d6f
     void navigateToDetail() {
       Get.to(
         () => LayananDetailPage(
@@ -137,16 +184,25 @@ class LayananPage extends StatelessWidget {
       );
     }
 
+<<<<<<< HEAD
     final formattedPrice = _formatPrice(price);
 
     return GestureDetector(
       onTap: navigateToDetail,
+=======
+    return GestureDetector(
+      onTap: navigateToDetail, // Menggunakan seluruh kartu untuk navigasi
+>>>>>>> e0c14dc96216e9a64eda25ee6dde43e409100d6f
       child: ClipRRect(
         borderRadius: BorderRadius.circular(24),
         child: BackdropFilter(
           filter: ImageFilter.blur(sigmaX: 18, sigmaY: 18),
           child: Container(
+<<<<<<< HEAD
             padding: const EdgeInsets.all(12),
+=======
+            padding: const EdgeInsets.all(12), // Menggunakan padding standar
+>>>>>>> e0c14dc96216e9a64eda25ee6dde43e409100d6f
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(24),
               gradient: LinearGradient(
@@ -180,24 +236,38 @@ class LayananPage extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+<<<<<<< HEAD
+=======
+                // Gambar
+>>>>>>> e0c14dc96216e9a64eda25ee6dde43e409100d6f
                 ClipRRect(
                   borderRadius: BorderRadius.circular(16),
                   child: Image.network(
                     imageUrl,
+<<<<<<< HEAD
                     height: 110,
+=======
+                    height: 110, // Menggunakan tinggi gambar standar
+>>>>>>> e0c14dc96216e9a64eda25ee6dde43e409100d6f
                     width: double.infinity,
                     fit: BoxFit.cover,
                   ),
                 ),
+<<<<<<< HEAD
 
                 const SizedBox(height: 10),
 
+=======
+                const SizedBox(height: 10), // Menggunakan spacing standar
+                // Judul
+>>>>>>> e0c14dc96216e9a64eda25ee6dde43e409100d6f
                 Text(
                   title,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: const TextStyle(
                     fontFamily: 'LexendExa',
+<<<<<<< HEAD
                     fontSize: 14,
                     fontWeight: FontWeight.bold,
                   ),
@@ -205,12 +275,21 @@ class LayananPage extends StatelessWidget {
 
                 const SizedBox(height: 6),
 
+=======
+                    fontSize: 14, // Menggunakan ukuran font standar
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(height: 6), // Menggunakan spacing standar
+                // Subtitle (Deskripsi Singkat)
+>>>>>>> e0c14dc96216e9a64eda25ee6dde43e409100d6f
                 Text(
                   subtitle,
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                   style: const TextStyle(
                     fontFamily: 'LexendExa',
+<<<<<<< HEAD
                     fontSize: 11,
                     color: Colors.black54,
                   ),
@@ -234,15 +313,45 @@ class LayananPage extends StatelessWidget {
                         ),
                       ),
 
+=======
+                    fontSize: 11, // Menggunakan ukuran font standar
+                    color: Colors.black54,
+                  ),
+                ),
+                const Spacer(), // Memberikan ruang kosong
+
+                // HARGA + TOMBOL DETAIL DALAM ROW
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    // HARGA (Kiri Bawah)
+                    Text(
+                      "Rp $price",
+                      style: const TextStyle(
+                        fontFamily: 'LexendExa',
+                        fontSize: 13, // Menggunakan ukuran font standar
+                        fontWeight: FontWeight.w600,
+                        color: Colors.blueAccent,
+                      ),
+                    ),
+
+                    // TOMBOL DETAIL (Kanan Bawah)
+>>>>>>> e0c14dc96216e9a64eda25ee6dde43e409100d6f
                     GestureDetector(
                       onTap: navigateToDetail,
                       child: Container(
                         padding: const EdgeInsets.symmetric(
+<<<<<<< HEAD
                           horizontal: 10,
                           vertical: 4,
                         ),
                         decoration: BoxDecoration(
                           color: const Color(0xFF1E88E5),
+=======
+                            horizontal: 10, vertical: 4),
+                        decoration: BoxDecoration(
+                          color: const Color(0xFF1E88E5), // Warna Biru
+>>>>>>> e0c14dc96216e9a64eda25ee6dde43e409100d6f
                           borderRadius: BorderRadius.circular(10),
                           boxShadow: [
                             BoxShadow(

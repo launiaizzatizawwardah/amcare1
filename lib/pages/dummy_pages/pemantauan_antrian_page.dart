@@ -98,6 +98,7 @@ class _PemantauanAntrianPageState extends State<PemantauanAntrianPage> {
             ),
           ),
 
+<<<<<<< HEAD
           // 🔹 Header biru
           Container(
             height: 180,
@@ -137,6 +138,43 @@ class _PemantauanAntrianPageState extends State<PemantauanAntrianPage> {
               ),
             ),
           ),
+=======
+          // 🔹 Header biru — judul dekat back button
+Container(
+  height: 120,
+  width: double.infinity,
+  decoration: const BoxDecoration(
+    color: Color(0xFF2E8BC0),
+    borderRadius: BorderRadius.only(
+      bottomLeft: Radius.circular(30),
+      bottomRight: Radius.circular(30),
+    ),
+  ),
+  child: SafeArea(
+    child: Row(
+      children: [
+        IconButton(
+          icon: const Icon(Icons.arrow_back, color: Colors.white),
+          onPressed: () => Get.offAllNamed(AppRoutes.home1),
+        ),
+
+        const SizedBox(width: 6), // jarak kecil biar mepet
+
+        const Text(
+          "Pemantauan Antrian",
+          style: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+            fontFamily: 'LexendExa',
+          ),
+        ),
+      ],
+    ),
+  ),
+),
+
+>>>>>>> e0c14dc96216e9a64eda25ee6dde43e409100d6f
 
           // 🔹 Konten utama
           Column(
@@ -266,7 +304,11 @@ class _PemantauanAntrianPageState extends State<PemantauanAntrianPage> {
                                   ),
                                 ),
                                 subtitle: Text(
+<<<<<<< HEAD
                                   "dr. ${poli['dokter'] ?? '-'} • Jam: ${poli['jam_praktik'] ?? '-'}",
+=======
+                                  "${poli['dokter'] ?? '-'} • Jam: ${poli['jam_praktik'] ?? '-'}",
+>>>>>>> e0c14dc96216e9a64eda25ee6dde43e409100d6f
                                   style: const TextStyle(
                                     fontSize: 12,
                                     color: Colors.black54,

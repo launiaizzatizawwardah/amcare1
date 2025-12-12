@@ -5,6 +5,7 @@ import '/routes/app_routes.dart';
 class NamaPoliklinikPage extends StatelessWidget {
   NamaPoliklinikPage({super.key});
 
+<<<<<<< HEAD
   final List<String> klinikList = [
     'Klinik Gigi',
     'Klinik Anak',
@@ -12,6 +13,84 @@ class NamaPoliklinikPage extends StatelessWidget {
     'Klinik Umum',
   ];
 
+=======
+  // 🔹 Daftar poliklinik sesuai API
+  final List<String> klinikList = [
+    "Penyakit Dalam",
+    "Kulit & Kelamin",
+    "Jantung & Pembuluh Darah",
+    "Kebidanan & Kandungan",
+    "Anak",
+    "Mata",
+    "Neurologi (Syaraf)",
+    "Psikiatri",
+    "THT",
+    "Orthopaedi",
+    "Paru",
+    "Prostodonsi",
+    "Periodonsi",
+    "Ozon",
+    "Stemcell & Secretome",
+    "Radiologi",
+    "Laboratorium",
+    "Vaksin Internasional",
+    "Rehabilitasi Medik",
+    "Bedah",
+    "Terapi Wicara",
+    "Akupunktur Medik",
+    "Fisioterapi",
+    "Laktasi",
+    "Okupasi Terapi",
+    "Hipnoterapi",
+    "Beauty Center",
+    "Bedah Anak",
+    "Gigi Umum",
+    "Klinik Umum",
+    "IGD 24 Jam",
+    "Patologi Klinik",
+    "Patologi Anatomi",
+    "Anestesi",
+  ];
+
+  // 🔹 Icon mapping
+  final Map<String, String> poliIcons = {
+    "Penyakit Dalam": "assets/images/penyakitdalam.png",
+    "Kulit & Kelamin": "assets/images/kulit.png",
+    "Jantung & Pembuluh Darah": "assets/images/jantung.png",
+    "Kebidanan & Kandungan": "assets/images/obgyn.png",
+    "Anak": "assets/images/anak.png",
+    "Mata": "assets/images/mata.png",
+    "Neurologi (Syaraf)": "assets/images/syaraf.png",
+    "Psikiatri": "assets/images/psikiatri.png",
+    "THT": "assets/images/THT.png",
+    "Orthopaedi": "assets/images/orthopedi.png",
+    "Paru": "assets/images/paru.png",
+    "Prostodonsi": "assets/images/gigi.png",
+    "Periodonsi": "assets/images/gigi.png",
+    "Ozon": "assets/images/ozon.png",
+    "Stemcell & Secretome": "assets/images/stemcell.png",
+    "Radiologi": "assets/images/radiologi.png",
+    "Laboratorium": "assets/images/dokterumum.png",
+    "Vaksin Internasional": "assets/images/vaksin.png",
+    "Rehabilitasi Medik": "assets/images/rehab_medik.png",
+    "Bedah": "assets/images/bedah.png",
+    "Terapi Wicara": "assets/images/terapi_wicara.png",
+    "Akupunktur Medik": "assets/images/akupunkture.png",
+    "Fisioterapi": "assets/images/fisioterapi.png",
+    "Laktasi": "assets/images/laktasi.png",
+    "Okupasi Terapi": "assets/images/okupasi.png",
+    "Hipnoterapi": "assets/images/hipnoterapi.png",
+    "Beauty Center": "assets/images/beautycenter.png",
+    "Bedah Anak": "assets/images/anak.png",
+    "Gigi Umum": "assets/images/gigi.png",
+    "Klinik Umum": "assets/images/dokterumum.png",
+    "IGD 24 Jam": "assets/images/igd.png",
+    "Patologi Klinik": "assets/images/dokterumum.png",
+    "Patologi Anatomi": "assets/images/dokterumum.png",
+    "Anestesi": "assets/images/bedah.png",
+  };
+
+>>>>>>> e0c14dc96216e9a64eda25ee6dde43e409100d6f
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,10 +104,16 @@ class NamaPoliklinikPage extends StatelessWidget {
             ),
           ),
 
+<<<<<<< HEAD
           // Header
           Container(
             height: 150,
             width: double.infinity,
+=======
+          // ================= HEADER =================
+          Container(
+            height: 95,
+>>>>>>> e0c14dc96216e9a64eda25ee6dde43e409100d6f
             decoration: const BoxDecoration(
               color: Color(0xFF2E8BC0),
               borderRadius: BorderRadius.only(
@@ -38,6 +123,7 @@ class NamaPoliklinikPage extends StatelessWidget {
             ),
             child: SafeArea(
               child: Row(
+<<<<<<< HEAD
                 children: [
                   IconButton(
                     icon: const Icon(Icons.arrow_back, color: Colors.white),
@@ -57,14 +143,34 @@ class NamaPoliklinikPage extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(width: 48),
+=======
+                children: const [
+                  BackButton(color: Colors.white),
+                  SizedBox(width: 4),
+                  Text(
+                    "Nama Poliklinik",
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                      fontFamily: 'LexendExa',
+                    ),
+                  )
+>>>>>>> e0c14dc96216e9a64eda25ee6dde43e409100d6f
                 ],
               ),
             ),
           ),
 
+<<<<<<< HEAD
           // List klinik
           Padding(
             padding: const EdgeInsets.fromLTRB(16, 170, 16, 0),
+=======
+          // ================= LIST POLIKLINIK =================
+          Padding(
+            padding: const EdgeInsets.fromLTRB(16, 110, 16, 0),
+>>>>>>> e0c14dc96216e9a64eda25ee6dde43e409100d6f
             child: ListView.builder(
               itemCount: klinikList.length,
               itemBuilder: (_, index) {
@@ -73,8 +179,15 @@ class NamaPoliklinikPage extends StatelessWidget {
                 return GestureDetector(
                   onTap: () {
                     Get.toNamed(
+<<<<<<< HEAD
                       AppRoutes.jadwalDokter,
                       arguments: klinik.replaceAll("Klinik ", ""),
+=======
+                      AppRoutes.jadwalDokterFilter, // 🔥 FIX: route filter dokter
+                      arguments: {
+                        "poli": klinik,
+                      },
+>>>>>>> e0c14dc96216e9a64eda25ee6dde43e409100d6f
                     );
                   },
                   child: Container(
@@ -84,8 +197,13 @@ class NamaPoliklinikPage extends StatelessWidget {
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(16),
+<<<<<<< HEAD
                       border: Border.all(
                           color: Colors.blueAccent.withOpacity(0.3)),
+=======
+                      border:
+                          Border.all(color: Colors.blueAccent.withOpacity(0.3)),
+>>>>>>> e0c14dc96216e9a64eda25ee6dde43e409100d6f
                       boxShadow: [
                         BoxShadow(
                           color: Colors.black.withOpacity(0.1),
@@ -94,13 +212,25 @@ class NamaPoliklinikPage extends StatelessWidget {
                         ),
                       ],
                     ),
+<<<<<<< HEAD
+=======
+
+>>>>>>> e0c14dc96216e9a64eda25ee6dde43e409100d6f
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Row(
                           children: [
+<<<<<<< HEAD
                             const Icon(Icons.local_hospital,
                                 size: 22, color: Color(0xFF2E8BC0)),
+=======
+                            Image.asset(
+                              poliIcons[klinik] ?? "assets/images/default.png",
+                              width: 28,
+                              height: 28,
+                            ),
+>>>>>>> e0c14dc96216e9a64eda25ee6dde43e409100d6f
                             const SizedBox(width: 12),
                             Text(
                               klinik,

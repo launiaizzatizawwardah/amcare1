@@ -19,4 +19,8 @@ class RiwayatRMTabPage extends StatelessWidget {
       ),
     );
   }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> e0c14dc96216e9a64eda25ee6dde43e409100d6f
