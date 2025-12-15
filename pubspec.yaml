@@ -13,11 +13,6 @@ dependencies:
 
   # GetX untuk state management & routing
   get: ^4.6.5
-<<<<<<< HEAD
-  url_launcher: ^6.2.2
-  font_awesome_flutter: ^10.6.0
-=======
->>>>>>> e0c14dc96216e9a64eda25ee6dde43e409100d6f
 
   # HTTP
   http: ^0.13.6
@@ -28,17 +23,9 @@ dependencies:
   # iOS icons
   cupertino_icons: ^1.0.8
 
-<<<<<<< HEAD
-  # ⭐⭐⭐ Animasi Super Ringan & Keren
-  flutter_staggered_animations: ^1.1.1
-  
-  # ⭐ Carousel animasi (opsional tapi bagus)
-  carousel_slider: ^4.2.1
-
-=======
   # Animasi Super Ringan & Keren
   flutter_staggered_animations: ^1.1.1
-  
+
   # Carousel animasi
   carousel_slider: ^4.2.1
 
@@ -53,15 +40,10 @@ dependencies:
 
   # HTTP client modern
   dio: ^5.9.0
->>>>>>> e0c14dc96216e9a64eda25ee6dde43e409100d6f
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-<<<<<<< HEAD
-
-=======
->>>>>>> e0c14dc96216e9a64eda25ee6dde43e409100d6f
   flutter_lints: ^5.0.0
 
 flutter:
@@ -85,8 +67,6 @@ flutter:
     - assets/images/emergency.png
     - assets/images/promosi.png
     - assets/images/background-marble.png
-<<<<<<< HEAD
-=======
     - assets/images/akupunkture.png
     - assets/images/anak.png
     - assets/images/beautycenter.png
@@ -116,4 +96,3 @@ flutter:
     - assets/images/terapi_wicara.png
     - assets/images/THT.png
     - assets/images/vaksin.png
->>>>>>> e0c14dc96216e9a64eda25ee6dde43e409100d6f
